@@ -1,0 +1,4 @@
+With Mongoku:
+$ npm install -g mongoku
+$ mongoku start
+=> http://localhost:3100/servers/localhost/databases

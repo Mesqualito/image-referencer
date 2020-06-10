@@ -1,0 +1,8 @@
+
+1.) Read file from a directory
+2.) Extract IPTC-Metadata from file
+3.) Write file as document and IPTC-Metadata as References into MongoDB
+4.) Add References from NAV (Article, Text de/en, References) to file
+
+4.) Read next file in directory
+5.) go down in directory (graph !)
