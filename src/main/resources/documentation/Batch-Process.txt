@@ -1,4 +1,6 @@
 
+How to use:
+
 I.) Choose one image on webpage:
 1.) Read file from a directory, with description
 2.) Extract IPTC-Metadata from file, if any
@@ -18,3 +20,10 @@ III.) Display images:
 IV.) Update images:
 1.) images as well as metatags can be changed
 2.) previous data should be kept in mongodb
+
+
+Where Spring Batch will be working:
+- to read in files directories, walk through a graph
+- to update the database if files in directory (or their metadata) have been changed
+- to update files in a directory with new metadata
+- to save (one, some or all) file(s) from database into a directory
