@@ -1,8 +1,20 @@
 
-1.) Read file from a directory
-2.) Extract IPTC-Metadata from file
-3.) Write file as document and IPTC-Metadata as References into MongoDB
+I.) Choose one image on webpage:
+1.) Read file from a directory, with description
+2.) Extract IPTC-Metadata from file, if any
+3.) Write file as document and IPTC-Metadata and description as References into MongoDB
 4.) Add References from NAV (Article, Text de/en, References) to file
 
-4.) Read next file in directory
-5.) go down in directory (graph !)
+II.) Choose directory on webpage:
+1.) recursive-flag: read all files in chosen directory and do it again for all subfolders (graph!)
+2.) proof if file is image-file (jpg, gif, tiff, raw, psd ... ?)
+3.) do I.) for all images found
+4.) use a description given on webpage, add count of image saved to db
+
+III.) Display images:
+1.) Via search page (search all refValues and add refTypes and dependent RefNames as possibilities to filter; also show history)
+2.) Via random gallery
+
+IV.) Update images:
+1.) images as well as metatags can be changed
+2.) previous data should be kept in mongodb

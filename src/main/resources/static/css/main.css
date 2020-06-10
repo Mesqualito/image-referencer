@@ -1,0 +1,6 @@
+@import './basic.css';
+
+.wrapper {
+    display: grid;
+    grid-gap: 20px;
+}
