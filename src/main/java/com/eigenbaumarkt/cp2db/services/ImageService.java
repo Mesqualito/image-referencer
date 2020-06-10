@@ -8,5 +8,7 @@ public interface ImageService {
 
     Image getImage(String id);
 
+    Image saveImage(Image image);
+
     List<Image> listImages();
 }

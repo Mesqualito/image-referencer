@@ -18,4 +18,9 @@ public class ImageServiceImpl implements ImageService {
     public List<Image> listImages() {
         return null;
     }
+
+    @Override
+    public Image saveImage(Image image) {
+        return null;
+    }
 }

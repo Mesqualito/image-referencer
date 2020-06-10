@@ -10,7 +10,7 @@
 
 <div class="container">
     <h2>Read image to db</h2>
-    <form class="form-horizontal" th:object="${imageCommand}" th:action="@{/addimages}" method="post">
+    <form class="form-horizontal" th:object="${imageCommand}" th:action="@{/doaddimg}" method="post">
 
         <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
             <p th:text="#{imageCommand.hasErrors}">Error Message</p>
