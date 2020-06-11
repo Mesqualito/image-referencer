@@ -2,6 +2,7 @@ package com.eigenbaumarkt.cp2db.services.mongo;
 
 import com.eigenbaumarkt.cp2db.commands.TargetCommand;
 import com.eigenbaumarkt.cp2db.converter.TargetCommandToTarget;
+import com.eigenbaumarkt.cp2db.converter.TargetToTargetCommand;
 import com.eigenbaumarkt.cp2db.domain.Target;
 import com.eigenbaumarkt.cp2db.repositories.TargetRepository;
 import com.eigenbaumarkt.cp2db.services.TargetService;
@@ -18,7 +19,11 @@ public class TargetServiceImpl implements TargetService {
     private final TargetCommandToTarget targetCommandToTarget;
     private final TargetToTargetCommand targetToTargetCommand;
 
-
+    public TargetServiceImpl(TargetRepository targetRepository, TargetCommandToTarget targetCommandToTarget, TargetToTargetCommand targetToTargetCommand) {
+        this.targetRepository = targetRepository;
+        this.targetCommandToTarget = targetCommandToTarget;
+        this.targetToTargetCommand = targetToTargetCommand;
+    }
 
     @Override
     public Set<Target> getTargets() {

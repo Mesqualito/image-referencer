@@ -11,7 +11,12 @@ import org.springframework.stereotype.Component;
 public class TargetCommandToTarget implements Converter<TargetCommand, Target> {
 
     private final ImageCommandToImage imageConverter;
+    private final ReferenceCommandToReference referenceConverter;
 
+    public TargetCommandToTarget(ImageCommandToImage imageConverter, ReferenceCommandToReference referenceConverter) {
+        this.imageConverter = imageConverter;
+        this.referenceConverter = referenceConverter;
+    }
 
     @Synchronized
     @Nullable
@@ -24,9 +29,17 @@ public class TargetCommandToTarget implements Converter<TargetCommand, Target> {
 
         final Target target = new Target();
         target.setId(source.getId());
-        target.setImages(imageConverter);
+
+        if (source.getReferences() != null && source.getReferences().size() > 0){
+            source.getReferences()
+                    .forEach( reference -> target.getReferences().add(referenceConverter.convert(reference)));
+        }
+
+        if (source.getImages() != null && source.getImages().size() > 0){
+            source.getImages()
+                    .forEach( image -> target.getImages().add(imageConverter.convert(image)));
+        }
 
         return target;
-
     }
 }

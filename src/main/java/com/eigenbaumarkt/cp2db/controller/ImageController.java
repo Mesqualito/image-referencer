@@ -1,10 +1,8 @@
 package com.eigenbaumarkt.cp2db.controller;
 
 
-import com.eigenbaumarkt.cp2db.commands.TargetCommand;
 import com.eigenbaumarkt.cp2db.services.ImageService;
 import com.eigenbaumarkt.cp2db.services.TargetService;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,11 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletResponse;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 
 @Controller
 public class ImageController {
@@ -33,7 +26,7 @@ public class ImageController {
     @GetMapping("recipe/{targetId}/image")
     public String showUploadForm(@PathVariable String targetId, Model model) {
 
-        model.addAttribute("target", targetService.findCommandById(Long.valueOf(targetId)));
+        model.addAttribute("target", targetService.findCommandById(targetId));
 
         return "target/imageuploadform";
     }
@@ -41,12 +34,13 @@ public class ImageController {
     @PostMapping("target/{targetId}/image")
     public String handleImagePost(@PathVariable String targetId, @RequestParam("imagefile") MultipartFile file) {
 
-        imageService.saveImageFile(Long.valueOf(targetId), file);
+        imageService.saveImageFile(targetId, file);
 
         return "redirect:/target/" + targetId + "/show";
 
     }
 
+    /*
     @GetMapping("target/{id}/targetimage")
     public void renderImageFromDB(@PathVariable String id, HttpServletResponse response) throws IOException {
 
@@ -64,4 +58,6 @@ public class ImageController {
         IOUtils.copy(inputStream, response.getOutputStream());
 
     }
+
+     */
 }

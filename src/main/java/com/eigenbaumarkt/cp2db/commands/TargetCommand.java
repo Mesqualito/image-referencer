@@ -11,8 +11,8 @@ import java.util.Set;
 public class TargetCommand {
 
     private String id;
-    private Byte[] image;
     private String description;
     private Set<ReferenceCommand> references = new HashSet<>();
+    private Set<ImageCommand> images = new HashSet<>();
 
 }

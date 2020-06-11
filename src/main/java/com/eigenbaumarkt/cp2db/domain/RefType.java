@@ -1,5 +1,6 @@
 package com.eigenbaumarkt.cp2db.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -14,12 +15,7 @@ public class RefType {
     @Id
     private String id;
     @Field
+    @JsonProperty("type_name")
     private String typeName;
-    @Field
-    private String typeValue;
 
-    public RefType(String typeName, String typeValue) {
-        this.typeName = typeName;
-        this.typeValue = typeValue;
-    }
 }
