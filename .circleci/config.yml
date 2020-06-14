@@ -81,6 +81,6 @@ jobs:
 
       - run:
           name: Send to codecov.io
-          command: bash <(curl -s https://codecov.io/bash)
+          command: bash <(curl -s https://codecov.io/bash) -v -Z
 
 #        CODECOV_TOKEN="cafe0468-e00d-457e-8e16-f6b9d8a428f4"
