@@ -4,6 +4,11 @@ jobs:
   build:
     docker:
       - image: circleci/openjdk:11.0.7-jdk-buster # see: https://circleci.com/docs/2.0/docker-image-tags.json
+      - image: circleci/mongo:latest
+          environment:
+            MONGO_INITDB_ROOT_USERNAME: testuser
+            MONGO_INITDB_ROOT_PASSWORD: test
+
     working_directory: ~/repo
     environment:
       # JVM maximum heap limit
@@ -14,7 +19,10 @@ jobs:
 
       - restore_cache: # restore the saved cache after the first run or if `pom.xml` has changed
           # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
-          key: circleci-spring-{{ checksum "pom.xml" }}
+          keys:
+            - circleci-spring-{{ checksum "pom.xml" }}
+            # fallback:
+            - circleci-spring-
 
       - run: mvn dependency:go-offline # gets the project dependencies
 
