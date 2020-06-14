@@ -62,7 +62,7 @@ jobs:
       - run:
           name: Test test in test
           command: |
-            mongo test --verbose --host localhost --port 27017 --authenticationDatabase=admin --username testuser --password test --eval 'show collections'
+            mongo test --verbose --host localhost --port 27017 --authenticationDatabase=admin --username testuser --password test --eval 'db.getCollectionNames()'
 
       # run tests and generate code coverage
       - run: mvn clean test # test runs 'jacocoTestReport' ?
