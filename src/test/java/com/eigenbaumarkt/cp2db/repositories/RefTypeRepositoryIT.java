@@ -16,30 +16,27 @@ import static org.junit.Assert.assertEquals;
 public class RefTypeRepositoryIT {
 
 
-    public class RefTypeRepositoryIT {
+    @Autowired // will autowire an object of UnitOfMeasureRepository
+            RefTypeRepository refTypeRepository;
 
-        @Autowired // will autowire an object of UnitOfMeasureRepository
-        RefTypeRepository refTypeRepository;
+    @Before
+    public void setUp() throws Exception {
+    }
 
-        @Before
-        public void setUp() throws Exception {
-        }
+    @Test
+    @DirtiesContext // will reload Spring Context
+    public void findByTypeNameGtin() {
 
-        @Test
-        @DirtiesContext // will reload Spring Context
-        public void findByTypeNameGtin() {
+        Optional<RefType> refTypeOptional = refTypeRepository.findByTypeName("GTIN");
 
-            Optional<RefType> refTypeOptional = refTypeRepository.findByTypeName("GTIN");
+        assertEquals("GTIN", refTypeOptional.get().getTypeName());
+    }
 
-            assertEquals("GTIN", refTypeOptional.get().getTypeName();
-        }
+    @Test
+    public void findByTypeNameIptc() {
 
-        @Test
-        public void findByTypeNameIptc() {
+        Optional<RefType> refTypeOptional = refTypeRepository.findByTypeName("IPTC");
 
-            Optional<RefType> refTypeOptional = refTypeRepository.findByTypeName("IPTC");
-
-            assertEquals("IPTC", refTypeOptional.get().getTypeName());
-        }
+        assertEquals("IPTC", refTypeOptional.get().getTypeName());
     }
 }

@@ -16,7 +16,6 @@ public class LoadDataConfig {
     @Bean
     public AbstractRepositoryPopulatorFactoryBean repositoryPopulator(ObjectMapper objectMapper, RefTypeRepository repository) {
         Jackson2RepositoryPopulatorFactoryBean factory = new CustomJackson2RepositoryPopulatorFactoryBean();
-        System.out.println("Alle Einträge der MongoDB-Collection \"referencetypes\" werden gelöscht!");
         repository.deleteAll();
         factory.setMapper(objectMapper);
         factory.setResources(new Resource[]{new ClassPathResource("static/collections/reference-types.json"),
