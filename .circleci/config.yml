@@ -24,7 +24,7 @@ jobs:
           key: circleci-spring-{{ checksum "pom.xml" }}
 
       # run tests and generate code coverage
-      - run: mvn clean test jacocoTestReport
+      - run: mvn clean test # test runs jacocoTestReport ?
 
       - run:
           name: Save test results
