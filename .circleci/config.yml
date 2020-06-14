@@ -3,8 +3,8 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/openjdk:11.0.7-jdk-buster # see: https://circleci.com/docs/2.0/docker-image-tags.json
-      - image: circleci/mongo:latest
+      - image: 'circleci/openjdk:11.0.7-jdk-buster' # see: https://circleci.com/docs/2.0/docker-image-tags.json
+      - image: 'circleci/mongo:latest'
       environment:
         MONGO_INITDB_ROOT_USERNAME: testuser
         MONGO_INITDB_ROOT_PASSWORD: test
