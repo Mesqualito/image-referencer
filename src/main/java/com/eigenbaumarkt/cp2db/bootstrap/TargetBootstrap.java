@@ -37,7 +37,7 @@ public class TargetBootstrap implements ApplicationListener<ContextRefreshedEven
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        targetRepository.saveAll(getTargets());
+        // targetRepository.saveAll(getTargets());
         log.debug("Loading Bootstrap Data!");
     }
 
