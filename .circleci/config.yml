@@ -65,7 +65,7 @@ jobs:
             mongo test --verbose --host localhost --port 27017 --authenticationDatabase=admin --username testuser --password test --eval 'db.getCollectionNames()'
 
       # run tests and generate code coverage
-      - run: mvn clean test # test runs 'jacocoTestReport' ?
+      - run: mvn -X clean test # test runs 'jacocoTestReport' ?
 
       - run:
           name: Save test results
@@ -73,7 +73,6 @@ jobs:
             mkdir -p ~/junit/
             find . -type f -regex ".*/build/test/-results/.*xml" -exec cp {} ~/junit/ \;
           when: always
-
       - store_test_results:
           path: ~/junit/
       - store_artifacts:
@@ -83,4 +82,5 @@ jobs:
           name: Send to codecov.io
           command: bash <(curl -s https://codecov.io/bash) -v -Z
 
-#        CODECOV_TOKEN="cafe0468-e00d-457e-8e16-f6b9d8a428f4"
+# not needed with CircleCi:
+# CODECOV_TOKEN=
