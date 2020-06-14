@@ -1,7 +1,7 @@
 package com.eigenbaumarkt.cp2db.repositories;
 
 import com.eigenbaumarkt.cp2db.domain.Image;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.repository.CrudRepository;
 
-public interface ImageRepository extends MongoRepository<Image, String> {
+public interface ImageRepository extends CrudRepository<Image, String> {
 }
