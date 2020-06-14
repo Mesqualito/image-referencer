@@ -16,7 +16,10 @@
 
     <properties>
         <java.version>11</java.version>
+        <!--
+        should be detected by Codecov:
         <sonar.coverage.jacoco.xmlReportPaths>~/junit/</sonar.coverage.jacoco.xmlReportPaths>
+        -->
     </properties>
 
     <dependencies>

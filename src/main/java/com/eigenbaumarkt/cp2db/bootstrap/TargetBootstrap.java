@@ -46,7 +46,7 @@ public class TargetBootstrap implements ApplicationListener<ContextRefreshedEven
         List<Target> targets = new ArrayList<>(2);
 
         List<String> expectedRefTypes = Arrays.asList("GTIN", "Image", "NAV Artikelnr.", "Hersteller-Artikelnr.",
-        "Lager-Barcode", "Sprache", "Debitoren-Nr.", "Kreditoren-Nr.", "IPTC-Tag");
+        "Lager-Barcode", "Sprache", "Debitoren-Nr.", "Kreditoren-Nr.", "IPTC");
 
         for (String refType : expectedRefTypes ) {
             Optional<RefType> eachRefTypeOptional = refTypeRepository.findByTypeName(refType);

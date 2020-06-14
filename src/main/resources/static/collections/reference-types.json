@@ -33,6 +33,6 @@
   },
   {
     "_class": "com.eigenbaumarkt.cp2db.domain.RefType",
-    "type_name": "IPTC-Tag"
+    "type_name": "IPTC"
   }
 ]
