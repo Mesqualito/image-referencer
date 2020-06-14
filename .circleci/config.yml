@@ -56,13 +56,13 @@ jobs:
       - run:
           name: Create MongoDB Test-Database
           command: |
-            mongo admin --host localhost --port 27017 --username admin --password adminpw --eval 'db.createUser({ user: "testuser", pwd: "test", roles: [{ role: "dbOwner", db: "test" }]})'
+            mongo admin --verbose --host localhost --port 27017 --username admin --password adminpw --eval 'db.createUser({ user: "testuser", pwd: "test", roles: [{ role: "dbOwner", db: "test" }]})'
 
       # Testing the MongoDB test environment (CircleCI makes it hard stuff):
       - run:
           name: Test test in test
           command: |
-            mongo test --verbose --host localhost --port 27017 --username testuser --password test --eval 'show collections'
+            mongo test --verbose --host localhost --port 27017 --authenticationDatabase=admin --username testuser --password test --eval 'show collections'
 
       # run tests and generate code coverage
       - run: mvn clean test # test runs 'jacocoTestReport' ?
