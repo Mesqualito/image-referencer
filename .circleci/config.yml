@@ -9,7 +9,7 @@ jobs:
           MONGO_INITDB_DATABASE: test
           MONGO_INITDB_ROOT_USERNAME: testuser
           MONGO_INITDB_ROOT_PASSWORD: test
-
+    parallelism: 4
     working_directory: ~/repo
     environment:
       # JVM maximum heap limit
@@ -31,6 +31,17 @@ jobs:
           paths:
             - ~/.m2
           key: circleci-spring-{{ checksum "pom.xml" }}
+
+      - run:
+          name: Waiting for MongoDB to be ready
+          command: |
+            for i in `seq 1 10`;
+            do
+              nc -z localhost 27017 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for MongoDB && exit 1
 
       # run tests and generate code coverage
       - run: mvn clean test # test runs jacocoTestReport ?
