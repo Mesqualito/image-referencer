@@ -45,12 +45,12 @@ jobs:
       - run:
           name: Create MongoDB Test-Database
           command: |
-            db.auth('root', 'password');
-            org = db.getSiblingDB('test');
+            db.auth(\'root\', \'password\');
+            org = db.getSiblingDB(\'test\');
             org.createUser({
-               user: 'testuser',
-               pwd: 'test',
-               roles: [ "readWrite" ]
+               user: \'testuser\',
+               pwd: \'test\',
+               roles: [ \"readWrite\" ]
             });
 
       # run tests and generate code coverage
