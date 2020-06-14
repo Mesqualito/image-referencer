@@ -4,11 +4,11 @@ jobs:
   build:
     docker:
       - image: 'circleci/openjdk:11.0.7-jdk-buster' # see: https://circleci.com/docs/2.0/docker-image-tags.json
-      - image: 'circleci/mongo:latest'
-        environment:
-          MONGO_INITDB_DATABASE: admin
-          MONGO_INITDB_ROOT_USERNAME: root
-          MONGO_INITDB_ROOT_PASSWORD: rootpw
+      - image: 'circleci/mongo:4.2'
+#        environment:
+#          MONGO_INITDB_DATABASE: admin
+#          MONGO_INITDB_ROOT_USERNAME: admin
+#          MONGO_INITDB_ROOT_PASSWORD: adminpw
     parallelism: 4
     working_directory: ~/repo
     environment:
@@ -42,11 +42,23 @@ jobs:
               sleep 1
             done
             echo Failed waiting for MongoDB && exit 1
+
+      # Install Mongo 4.2 CLI into buster:
+      - run:
+          name: Install mongo cli into buster container
+          command: |
+            wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
+            echo "deb http://repo.mongodb.org/apt/debian buster/mongodb-org/4.2 main" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+            sudo apt-get update
+            sudo apt-get install -y --force-yes mongodb-org-shell
+
+      # Set up Mongo DB authorisation:
       - run:
           name: Create MongoDB Test-Database
           command: |
             echo "Creating mongo users..."
-            mongo admin --host localhost -u root -p rootpw --eval "db.createUser({user: 'testuser', pwd: 'test', roles: [{role: 'readWrite', db: 'test'}]})"
+            mongo admin --eval 'db.createUser({ user: "admin", pwd: "adminpw", roles: [{ role: "userAdminAnyDatabase", db: "admin" }]})'
+            mongo main -uadmin -padminpw --authenticationDatabase admin --eval 'db.createUser({ user: "testuser", pwd: "test", roles: [{ role: "dbOwner", db: "test" }]})'
             echo "Mongo user test created."
 
       # run tests and generate code coverage
