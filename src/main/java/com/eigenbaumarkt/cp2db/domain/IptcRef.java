@@ -8,12 +8,66 @@ import com.nmote.iim4j.dataset.DataSetInfo;
 import com.nmote.iim4j.dataset.InvalidDataSetException;
 import com.nmote.iim4j.stream.FileIIMInputStream;
 import com.nmote.iim4j.stream.JPEGIIMInputStream;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class IptcData {
+@NoArgsConstructor
+@Data
+public class IptcRef implements Reference {
+
+    @Id
+    private String id;
+    @Field
+    private String refName;
+    @Field
+    private String refValue;
+    @Field
+    private RefType referenceType;
+
+    // TODO: Fields for HashMap from readIptc
+
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    @Override
+    public String getRefName() {
+        return refName;
+    }
+
+    @Override
+    public String getRefValue() {
+        return refValue;
+    }
+
+    @Override
+    public RefType getReferenceType() {
+        return referenceType;
+    }
+
+    @Override
+    public void setRefName(String refName) {
+        this.refName = refName;
+
+    }
+
+    @Override
+    public void setRefValue(String refValue) {
+        this.refValue = refValue;
+    }
+
+    // TODO: ReferenceType should be refType.typeName.equals("IPTC")
+    @Override
+    public void setReferenceType(RefType refType) {
+        this.referenceType = refType;
+    }
 
     public HashMap<String, String> readIptc(File file) throws IOException, InvalidDataSetException {
 
@@ -33,6 +87,5 @@ public class IptcData {
         }
 
         return dataMap;
-
     }
 }

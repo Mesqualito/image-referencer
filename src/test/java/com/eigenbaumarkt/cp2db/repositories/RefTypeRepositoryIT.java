@@ -4,8 +4,9 @@ import com.eigenbaumarkt.cp2db.domain.RefType;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.DirtiesContext;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
@@ -17,17 +18,14 @@ public class RefTypeRepositoryIT {
     RefTypeRepository refTypeRepository;
 
     @Test
-    @DirtiesContext // will reload Spring Context
-    public void findByTypeNameGtin() {
+    public void findByTypeNames() {
 
-        Optional<RefType> refTypeOptional = refTypeRepository.findByTypeName("GTIN");
-        assertEquals("GTIN", refTypeOptional.get().getTypeName());
-    }
+        List<String> expectedRefTypes = Arrays.asList("GTIN", "Image", "NAV Artikelnr.", "Hersteller-Artikelnr.",
+                "Lager-Barcode", "Sprache", "Debitoren-Nr.", "Kreditoren-Nr.", "IPTC");
 
-    @Test
-    public void findByTypeNameIptc() {
-
-        Optional<RefType> refTypeOptional = refTypeRepository.findByTypeName("IPTC");
-        assertEquals("IPTC", refTypeOptional.get().getTypeName());
+        for (String refType : expectedRefTypes) {
+            Optional<RefType> refTypeOptional = refTypeRepository.findByTypeName(refType);
+            assertEquals(refType, refTypeOptional.get().getTypeName());
+        }
     }
 }

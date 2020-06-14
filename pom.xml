@@ -12,7 +12,7 @@
     <artifactId>cp2db</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>cp2db</name>
-    <description>Copy image files into NoSQL-database</description>
+    <description>Copy imageRef files into NoSQL-database</description>
 
     <properties>
         <java.version>11</java.version>

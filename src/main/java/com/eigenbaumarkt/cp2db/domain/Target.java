@@ -22,13 +22,13 @@ public class Target {
     private String description;
 
     @DBRef
-    private Set<Image> images = new HashSet<>();
+    private Set<ImageRef> imageRefs = new HashSet<>();
 
     @DBRef
     private Set<Reference> references = new HashSet<>();
 
-    public Target addImage(Image image) {
-        this.images.add(image);
+    public Target addImage(ImageRef imageRef) {
+        this.imageRefs.add(imageRef);
         return this;
     }
 

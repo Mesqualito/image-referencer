@@ -10,20 +10,23 @@ import java.time.Instant;
 
 @NoArgsConstructor
 @Data
-@Document(collection="images")
-public class Image {
+@Document(collection="longtexts")
+public class LongTextRef implements Reference {
 
     @Id
     private String id;
+
+    // no use-case yet...
     @Field
-    private String description;
+    private String refName;
+
+    @Field
+    private String refValue;
+
+    // TODO: ReferenceType should be refType.typeName.equals("Longtext")
+    @Field
+    private RefType referenceType;
+
     @Field
     private Instant savedAt;
-    @Field
-    private Byte[] image;
-
-    public Image(String description, Instant savedAt) {
-        this.description = description;
-        this.savedAt = savedAt;
-    }
 }

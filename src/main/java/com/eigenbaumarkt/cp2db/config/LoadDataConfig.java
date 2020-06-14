@@ -18,8 +18,10 @@ public class LoadDataConfig {
         Jackson2RepositoryPopulatorFactoryBean factory = new CustomJackson2RepositoryPopulatorFactoryBean();
         repository.deleteAll();
         factory.setMapper(objectMapper);
-        factory.setResources(new Resource[]{new ClassPathResource("static/collections/reference-types.json"),
-                new ClassPathResource("static/collections/placeholder.json")});
+        factory.setResources(new Resource[]{new ClassPathResource("static/collections/reference-types.json")
+        //        , new ClassPathResource("static/collections/placeholder.json"), ...
+        });
+        System.out.println("Reference-Types loaded!");
         return factory;
     }
 }

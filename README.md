@@ -1,3 +1,3 @@
-[![CircleCI](https://circleci.com/gh/Mesqualito/image-referencer.svg?style=svg)](https://circleci.com/gh/Mesqualito/image-referencer) [![codecov](https://codecov.io/gh/Mesqualito/image-referencer/branch/master/graph/badge.svg)](https://codecov.io/gh/Mesqualito/image-referencer)
+[![CircleCI](https://circleci.com/gh/Mesqualito/imageRef-referencer.svg?style=svg)](https://circleci.com/gh/Mesqualito/imageRef-referencer) [![codecov](https://codecov.io/gh/Mesqualito/imageRef-referencer/branch/master/graph/badge.svg)](https://codecov.io/gh/Mesqualito/imageRef-referencer)
 
 

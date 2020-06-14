@@ -36,8 +36,8 @@ public class TargetToTargetCommand implements Converter<Target, TargetCommand> {
                     .forEach( reference -> command.getReferences().add(referenceConverter.convert(reference)));
         }
 
-        if (source.getImages() != null && source.getImages().size() > 0){
-            source.getImages()
+        if (source.getImageRefs() != null && source.getImageRefs().size() > 0){
+            source.getImageRefs()
                     .forEach( image -> command.getImages().add(imageConverter.convert(image)));
         }
 

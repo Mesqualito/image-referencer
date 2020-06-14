@@ -1,26 +1,18 @@
 package com.eigenbaumarkt.cp2db.domain;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Field;
+import java.time.Instant;
 
-@NoArgsConstructor
-@Data
-public class Reference {
+public interface Reference {
 
-    @Id
-    private String id;
-    @Field
-    private String refName;
-    @Field
-    private String refValue;
-    @DBRef
-    private RefType referenceType;
+    String getId();
+    String getRefName();
+    String getRefValue();
+    RefType getReferenceType();
+    Instant getSavedAt();
 
-    public Reference(String refName, String refValue) {
-        this.refName = refName;
-        this.refValue = refValue;
-    }
+    void setRefName(String refName);
+    void setRefValue(String refValue);
+    void setReferenceType(RefType refType);
+    void setSavedAt(Instant timestamp);
+
 }
