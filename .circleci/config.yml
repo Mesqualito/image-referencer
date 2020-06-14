@@ -57,7 +57,7 @@ jobs:
           name: Create MongoDB Test-Database
           command: |
             mongo main -uadmin -padminpw --authenticationDatabase admin --eval 'db.createUser({ user: "testuser", pwd: "test", roles: [{ role: "dbOwner", db: "test" }]})'
-            
+
       # Testing the MongoDB test environment (CircleCI makes it hard stuff):
             - run:
                 name: Test test in test
