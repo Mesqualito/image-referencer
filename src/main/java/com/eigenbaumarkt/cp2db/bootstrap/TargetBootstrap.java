@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -79,9 +78,6 @@ public class TargetBootstrap implements ApplicationListener<ContextRefreshedEven
     private List<Target> getTargets() {
 
         List<Target> targets = new ArrayList<>(2);
-
-        List<String> expectedRefTypes = Arrays.asList("GTIN", "Bild", "NAV Artikelnr.", "Hersteller-Artikelnr.",
-                "Lager-Barcode", "Sprache", "NAV Debitoren-Nr.", "NAV Kreditoren-Nr.", "IPTC");
 
         Optional<RefType> refTypeOptionalGtin = refTypeRepository.findByTypeName("GTIN");
         if (!refTypeOptionalGtin.isPresent()) {
