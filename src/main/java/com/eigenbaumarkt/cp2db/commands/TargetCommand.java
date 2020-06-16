@@ -1,13 +1,13 @@
 package com.eigenbaumarkt.cp2db.commands;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
 
-@NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class TargetCommand {
 
     private String id;

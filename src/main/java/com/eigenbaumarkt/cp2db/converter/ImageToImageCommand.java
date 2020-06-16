@@ -21,7 +21,7 @@ public class ImageToImageCommand implements Converter<ImageRef, ImageCommand> {
 
         final ImageCommand command = new ImageCommand();
         command.setId(source.getId());
-        command.setDescription(source.getDescription());
+        command.setDescription(source.getRefValue());
         command.setImage(source.getImage());
         command.setSavedAt(source.getSavedAt());
 

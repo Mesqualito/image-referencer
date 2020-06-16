@@ -1,17 +1,21 @@
 package com.eigenbaumarkt.cp2db.domain;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.eigenbaumarkt.cp2db.repositories.RefTypeRepository;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.Instant;
+import java.util.Optional;
 
-@NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Document(collection="gtins")
 public class GtinRef implements Reference {
+
+    private final RefTypeRepository refTypeRepository;
 
     @Id
     private String id;
@@ -24,11 +28,21 @@ public class GtinRef implements Reference {
     @Field
     private String refValue;
 
-    // TODO: ReferenceType should be refType.typeName.equals("GTIN")
     @Field
     private RefType referenceType;
 
     @Field
     private Instant savedAt;
 
+    public GtinRef(RefTypeRepository refTypeRepository) {
+        this.refTypeRepository = refTypeRepository;
+        setReferenceType();
+    }
+
+    public void setReferenceType() {
+        Optional<RefType> refTypeGtin = refTypeRepository.findByTypeName("GTIN");
+        if(!refTypeGtin.isPresent()) {
+            throw new RuntimeException("Expected ReferenceType \'GTIN\' not found!");
+        }
+    }
 }

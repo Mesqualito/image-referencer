@@ -1,10 +1,10 @@
 package com.eigenbaumarkt.cp2db.commands;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-@NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class RefTypeCommand {
 
     private String id;

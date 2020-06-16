@@ -5,14 +5,12 @@ import java.time.Instant;
 public interface Reference {
 
     String getId();
-    String getRefName();
+    RefType getRefType();
     String getRefValue();
-    RefType getReferenceType();
     Instant getSavedAt();
 
-    void setRefName(String refName);
+    void setRefType(RefType refType);
     void setRefValue(String refValue);
-    void setReferenceType(RefType refType);
     void setSavedAt(Instant timestamp);
 
 }

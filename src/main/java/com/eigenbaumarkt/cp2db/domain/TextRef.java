@@ -11,7 +11,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @Data
 @Document(collection="shorttexts")
-public class ShortTextRef implements Reference {
+public class TextRef implements Reference {
 
     @Id
     private String id;
