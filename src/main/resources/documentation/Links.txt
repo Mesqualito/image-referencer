@@ -1,0 +1,18 @@
+#### NoSQL - MongoDB ####
+- https://www.mongodb.com/blog/post/6-rules-of-thumb-for-mongodb-schema-design-part-1 (ff.) (29.05.2014)
+
+#### Spring Boot with MongoDB ####
+- https://springframework.guru/configuring-spring-boot-for-mongo (6.02.2017)
+- https://github.com/springframeworkguru/spring5-mongo-recipe-app (18.12.2018)
+- https://stackoverflow.com/q/51221777/7773582 (20.11.2019)
+
+#### Spring Batch ####
+- https://howtodoinjava.com/spring-batch/java-config-multiple-steps (1.11.2018)
+- https://dzone.com/articles/spring-batch-read-from-xml-and-write-to-mongo (16.01.2020)
+
+#### IPTC ####
+- https://stackoverflow.com/questions/3851665/java-library-for-reading-and-writing-iptc-metadata-to-jpeg-and-tiff
+- https://github.com/vnesek/nmote-iim4j
+
+#### CSS-Grid ####
+- https://courses.wesbos.com

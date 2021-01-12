@@ -1,0 +1,86 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: 'circleci/openjdk:11.0.7-jdk-buster' # see: https://circleci.com/docs/2.0/docker-image-tags.json
+      - image: 'circleci/mongo:4.2'
+        environment:
+          MONGO_INITDB_DATABASE: admin
+          MONGO_INITDB_ROOT_USERNAME: admin
+          MONGO_INITDB_ROOT_PASSWORD: adminpw
+    parallelism: 4
+    working_directory: ~/repo
+    environment:
+      # JVM maximum heap limit
+      JVM_OPTS: -Xmx3200m
+      TERM: dumb
+    steps:
+      - checkout # check out source code to working directory
+
+      - restore_cache: # restore the saved cache after the first run or if `pom.xml` has changed
+          # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+          keys:
+            - circleci-spring-{{ checksum "pom.xml" }}
+            # fallback:
+            - circleci-spring-
+
+      - run: mvn dependency:go-offline # gets the project dependencies
+
+      - save_cache: # saves the project dependencies
+          paths:
+            - ~/.m2
+          key: circleci-spring-{{ checksum "pom.xml" }}
+
+      - run:
+          name: Waiting for MongoDB to be ready
+          command: |
+            for i in `seq 1 10`;
+            do
+              nc -z localhost 27017 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for MongoDB && exit 1
+
+      # Install Mongo 4.2 CLI into buster:
+      - run:
+          name: Install mongo cli into buster container
+          command: |
+            wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
+            echo "deb http://repo.mongodb.org/apt/debian buster/mongodb-org/4.2 main" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+            sudo apt-get update
+            sudo apt-get install -y mongodb-org-shell
+
+      # Set up Mongo DB authorisation:
+      - run:
+          name: Create MongoDB Test-Database
+          command: |
+            mongo admin --verbose --host localhost --port 27017 --username admin --password adminpw --eval 'db.createUser({ user: "testuser", pwd: "test", roles: [{ role: "dbOwner", db: "test" }]})'
+
+      # Testing the MongoDB test environment (CircleCI makes it hard stuff):
+      - run:
+          name: Test test in test
+          command: |
+            mongo test --verbose --host localhost --port 27017 --authenticationDatabase=admin --username testuser --password test --eval 'db.getCollectionNames()'
+
+      # run tests and generate code coverage
+      - run: mvn -X clean test # test runs 'jacocoTestReport' ?
+
+      - run:
+          name: Save test results
+          command: |
+            mkdir -p ~/junit/
+            find . -type f -regex ".*/build/test/-results/.*xml" -exec cp {} ~/junit/ \;
+          when: always
+      - store_test_results:
+          path: ~/junit/
+      - store_artifacts:
+          path: ~/junit/
+
+      - run:
+          name: Send to codecov.io
+          command: bash <(curl -s https://codecov.io/bash) -v -Z
+
+# not needed with CircleCi:
+# CODECOV_TOKEN=

@@ -1,0 +1,24 @@
+package com.eigenbaumarkt.cp2db.domain;
+
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+import java.time.Instant;
+
+@Getter
+@Setter
+public class IptcRef implements Reference {
+
+    @Id
+    private String id;
+    @Field
+    private RefType refType;
+    @Field
+    private String refValue;
+    @Field
+    private RefType referenceType;
+    @Field
+    private Instant savedAt;
+}
